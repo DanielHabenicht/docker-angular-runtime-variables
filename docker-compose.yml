@@ -1,0 +1,11 @@
+version: "2.1"
+
+services:
+  docker-angular-runtime-variables:
+    image: docker-angular-runtime-variables
+    build: .
+    environment:
+      TEST: "FUCK YEAH"
+    ports:
+      - 8080:80
+      - 443:443

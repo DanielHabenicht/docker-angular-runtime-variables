@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'distribution-time-variables'`, () => {
+  it(`should have as title 'docker-angular-runtime-variables'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('distribution-time-variables');
+    expect(app.title).toEqual('docker-angular-runtime-variables');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to distribution-time-variables!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to docker-angular-runtime-variables!');
   });
 });

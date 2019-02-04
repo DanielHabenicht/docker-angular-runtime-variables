@@ -1,0 +1,11 @@
+version: "2.1"
+
+services:
+  docker-angular-runtime-variables:
+    image: docker-angular-runtime-variables
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 80:80
+      - 443:443
