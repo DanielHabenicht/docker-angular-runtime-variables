@@ -11,6 +11,7 @@ fi
 
 for i in "${variables[@]}"
 do
+  # Error if variable is not defined
   if [[ -z ${!i} ]]; then
     echo 'ERROR: Variable "'$i'" not defined.'
     exit 1
@@ -19,9 +20,15 @@ do
   # Escape special characters, for URLs
   replaceString=$(echo ${!i} | sed -e 's/[\/&]/\\&/g')
 
-echo $1
   # Get all files including the environment variable (and ending with '.html') substitute the placeholder with its content
-  grep -rl --include \*.html $i $1 | xargs sed -i "s/\${""$i""}/$replaceString/Ig"
+  if [ "$DEBUG" = true ]
+  then
+    # If DEBUG=true in order to log the replaced files
+    grep -rl --include \*.html "$i" "$1" | xargs sed -i "s/\${""$i""}/$replaceString/Ig;w /dev/stdout"
+  else
+    # If DEBUG=false do it without logging
+    grep -rl --include \*.html "$i" "$1" | xargs sed -i "s/\${""$i""}/$replaceString/Ig"
+  fi
 done
 
 # Execute all other parameters
