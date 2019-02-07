@@ -1,27 +1,14 @@
-# DistributionTimeVariables
+# Docker-Angular Runtime Variables
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
+This is the demo repo for my guide: [https://danielhabenicht.github.io/docker/angular/2019/02/06/angular-nginx-runtime-variables.html](https://danielhabenicht.github.io/docker/angular/2019/02/06/angular-nginx-runtime-variables.html)
 
-## Development server
+A guide for setting up runtime variables for an Angular App which is hosted in a Nginx Docker container (or any else). What’s special about this? It does not need another file to be loaded before bootstrapping the app, neither to be included via the docker run command. It simply lets you set variables in you angular app via Environment variables passed to docker by `docker run -p 80:80 -e TEST_ENV="This really works!" -it danielhabenicht/docker-angular-runtime-variables`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Quick Guide
 
-## Code scaffolding
+> For a more in depth guide, follow my [guide](https://danielhabenicht.github.io/docker/angular/2019/02/06/angular-nginx-runtime-variables.html).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Have a look at the [Dockerfile](./Dockerfile)
+   - Notice the [ENTRYPOINT Script](./substitute_env_variables_multi.sh), it substitutes the variables in any or the given files with the variables in your Environment
+2. `docker build . -t runtime-env-image`
+3. `docker run --rm -e "TEST_ENV=That was fast!" -it runtime-env-image`
