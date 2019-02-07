@@ -19,6 +19,7 @@ do
   # Escape special characters, for URLs
   replaceString=$(echo ${!i} | sed -e 's/[\/&]/\\&/g')
 
+echo $1
   # Get all files including the environment variable (and ending with '.html') substitute the placeholder with its content
   grep -rl --include \*.html $i $1 | xargs sed -i "s/\${""$i""}/$replaceString/Ig"
 done
