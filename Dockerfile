@@ -5,10 +5,11 @@
 FROM node:11.2 as builder
 
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json", "./"]
+COPY ./package.json ./package.json
+COPY ./package-lock.json ./package-lock.json
 RUN npm ci --silent
 COPY . .
-CMD npm run build
+RUN npm run build
 
 
 
@@ -32,7 +33,7 @@ WORKDIR /etc/nginx
 # Copy our ENTRYPOINT script into the docker container
 COPY ./substitute_env_variables_multi.sh ./entrypoint.sh
 # and mark it as executable
-RUN chmod -x ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # Define it as the entrypoint script together with the path or directory that should be searched and substituted with the environment variables
 ENTRYPOINT ["./entrypoint.sh", "/usr/share/nginx/html/index.html"]
