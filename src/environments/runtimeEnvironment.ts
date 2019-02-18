@@ -1,5 +1,5 @@
 declare var ENV;
 
 export const runtimeEnvironment = {
-  test: ENV.test
+  test: ENV.test === '${TEST_ENV}' ? false : ENV.test
 };
